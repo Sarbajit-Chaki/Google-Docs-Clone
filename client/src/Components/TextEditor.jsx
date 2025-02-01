@@ -25,7 +25,7 @@ const TextEditor = () => {
     const [quill, setQuill] = useState()
 
     useEffect(() => {  //make connection at the first render
-        const s = io("http://localhost:3001")
+        const s = io(`${import.meta.env.VITE_BACKEND_URL}`)
         setSocket(s);
 
         return () => {

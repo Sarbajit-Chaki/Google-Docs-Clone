@@ -1,12 +1,14 @@
 import { Server } from "socket.io";
 import mongoose from "mongoose";
 import { Document } from "./models/Document.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-mongoose.connect("mongodb://localhost:27017/doc-clone")
+mongoose.connect(process.env.MONGODB_URL).then(() => console.log("Connected")).catch((err) => console.log("+++",err))
 
 const io = new Server(3001, {
     cors: {
-        origin: "http://localhost:5173",
+        origin: `${process.env.FRONTEND_URL}`,
         methods: ['GET', 'POST'],
     },
 })
